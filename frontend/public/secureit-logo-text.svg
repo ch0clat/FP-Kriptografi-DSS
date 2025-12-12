@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180" role="img" aria-labelledby="title">
+  <title>SecureIT logo</title>
+  <defs>
+    <linearGradient id="shieldGradientLogo" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#133d73" />
+      <stop offset="100%" stop-color="#1f4f96" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(20 10)">
+    <path
+      d="M96 10 24 38v56c0 36.6 24.5 70.9 61.4 83a7.7 7.7 0 0 0 5 0c36.9-12.1 61.4-46.4 61.4-83V38Z"
+      fill="url(#shieldGradientLogo)"
+      stroke="#0b2c55"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M80 54h44v52H80z"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M80 54h30v20h14"
+      fill="none"
+      stroke="#ffffff"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M114 104a16 16 0 1 0-32 0v14h-6v28h44v-28h-6Zm-16-10a10 10 0 0 1 10 10v14h-20v-14a10 10 0 0 1 10-10Z"
+      fill="#ffffff"
+    />
+  </g>
+  <text
+    x="220"
+    y="112"
+    font-size="64"
+    font-weight="700"
+    font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+    fill="#113b73"
+  >SecureIT</text>
+</svg>

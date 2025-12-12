@@ -30,6 +30,17 @@ type UploadedDoc = {
   createdAt: string;
 };
 
+type InboxDoc = {
+  id: string;
+  title: string;
+  filename: string;
+  ownerEmail: string;
+  createdAt: string | null;
+  verifyUrl: string;
+  isOwner: boolean;
+  hasKey: boolean;
+};
+
 type VerifyResponse = {
   id: string;
   title: string;
@@ -320,9 +331,12 @@ function App() {
   const [keyBackupNotice, setKeyBackupNotice] = useState<MessageState | null>(
     null
   );
-  const [dashboardView, setDashboardView] = useState<"home" | "profile">(
-    "home"
-  );
+  const [inboxDocs, setInboxDocs] = useState<InboxDoc[]>([]);
+  const [inboxLoading, setInboxLoading] = useState(false);
+  const [inboxError, setInboxError] = useState<string | null>(null);
+  const [dashboardView, setDashboardView] = useState<
+    "workspace" | "inbox" | "profile"
+  >("workspace");
 
   useEffect(() => {
     persistUploads(recentDocs);
@@ -331,7 +345,7 @@ function App() {
     if (!auth) {
       setKeyImportText("");
       setKeyBackupNotice(null);
-      setDashboardView("home");
+      setDashboardView("workspace");
     }
   }, [auth]);
 
@@ -476,6 +490,67 @@ function App() {
       setUsersLoading(false);
     }
   }, []);
+
+  const refreshInbox = useCallback(async () => {
+    if (!auth) {
+      setInboxDocs([]);
+      setInboxError(null);
+      setInboxLoading(false);
+      return;
+    }
+
+    setInboxLoading(true);
+    setInboxError(null);
+    try {
+      const resp = await fetch(apiUrl("/api/docs/inbox"), {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      });
+      const text = await resp.text();
+      let payload: any = {};
+      if (text) {
+        try {
+          payload = JSON.parse(text);
+        } catch {
+          throw new Error("Server returned invalid JSON while loading inbox");
+        }
+      }
+
+      if (!resp.ok) {
+        throw new Error(
+          payload.error || `Inbox request failed (${resp.status})`
+        );
+      }
+
+      const docs: InboxDoc[] = Array.isArray(payload.docs)
+        ? payload.docs.map((entry: any) => ({
+            id: entry.id,
+            title: entry.title || entry.filename || entry.id,
+            filename: entry.filename,
+            ownerEmail: entry.ownerEmail || entry.owner_email || "",
+            createdAt: entry.createdAt || entry.created_at || null,
+            verifyUrl: resolveVerifyUrl(entry.id, entry.verifyUrl),
+            isOwner: Boolean(entry.isOwner ?? entry.is_owner),
+            hasKey: Boolean(entry.hasKey ?? entry.has_key),
+          }))
+        : [];
+      setInboxDocs(docs);
+    } catch (error) {
+      setInboxError((error as Error).message ?? String(error));
+      setInboxDocs([]);
+    } finally {
+      setInboxLoading(false);
+    }
+  }, [auth]);
+
+  useEffect(() => {
+    if (auth) {
+      refreshInbox().catch(() => undefined);
+    } else {
+      setInboxDocs([]);
+      setInboxError(null);
+      setInboxLoading(false);
+    }
+  }, [auth, refreshInbox]);
 
   const buildBackupJson = useCallback(():
     | { json: string }
@@ -790,7 +865,7 @@ function App() {
           role: decoded?.role ?? "student",
         };
         setAuth(session);
-        setDashboardView("home");
+        setDashboardView("workspace");
         setAuthMessage("Login successful");
         setPassword("");
         fetchUserDirectory(token).catch(() => undefined);
@@ -814,7 +889,7 @@ function App() {
     setRecipientQuery("");
     setKeyImportText("");
     setKeyBackupNotice(null);
-    setDashboardView("home");
+    setDashboardView("workspace");
   }, []);
 
   const handleUploadSubmit = useCallback(
@@ -970,13 +1045,14 @@ function App() {
         setSelectedRecipients([]);
         setRecipientQuery("");
         setFileInputKey((key) => key + 1);
+        refreshInbox().catch(() => undefined);
       } catch (err) {
         setUploadMessage("Upload failed: " + String(err));
       } finally {
         setIsUploading(false);
       }
     },
-    [allUsers, auth, selectedRecipients, uploadFile, uploadTitle]
+    [allUsers, auth, refreshInbox, selectedRecipients, uploadFile, uploadTitle]
   );
 
   const handleDownload = useCallback(async () => {
@@ -1140,10 +1216,20 @@ function App() {
       <div className="dashboard-nav">
         <button
           type="button"
-          className={dashboardView === "home" ? "active" : ""}
-          onClick={() => setDashboardView("home")}
+          className={dashboardView === "workspace" ? "active" : ""}
+          onClick={() => setDashboardView("workspace")}
         >
           Workspace
+        </button>
+        <button
+          type="button"
+          className={dashboardView === "inbox" ? "active" : ""}
+          onClick={() => {
+            setDashboardView("inbox");
+            refreshInbox().catch(() => undefined);
+          }}
+        >
+          Inbox
         </button>
         <button
           type="button"
@@ -1154,7 +1240,7 @@ function App() {
         </button>
       </div>
 
-      {dashboardView === "home" ? (
+      {dashboardView === "workspace" ? (
         <>
           <section className="card">
             <header className="card-header">
@@ -1405,6 +1491,88 @@ function App() {
             )}
           </section>
         </>
+      ) : dashboardView === "inbox" ? (
+        <>
+          <section className="card">
+            <header className="card-header">
+              <div>
+                <h2>Inbox</h2>
+                <p>Documents that you own or that others shared with you.</p>
+              </div>
+              <button
+                type="button"
+                className="secondary"
+                onClick={() => refreshInbox().catch(() => undefined)}
+                disabled={inboxLoading}
+              >
+                {inboxLoading ? "Refreshing..." : "Refresh"}
+              </button>
+            </header>
+            {inboxError && <p className="message warning">{inboxError}</p>}
+            {inboxDocs.length === 0 ? (
+              <p className="muted">
+                {inboxLoading
+                  ? "Loading inbox..."
+                  : "No documents available yet."}
+              </p>
+            ) : (
+              <table className="recent-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Owner</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {inboxDocs.map((doc) => {
+                    const status = doc.isOwner
+                      ? "Owner"
+                      : doc.hasKey
+                      ? "Shared"
+                      : "Awaiting key";
+                    return (
+                      <tr key={doc.id}>
+                        <td>{doc.title || doc.filename || doc.id}</td>
+                        <td>{doc.ownerEmail}</td>
+                        <td>
+                          {doc.createdAt
+                            ? new Date(doc.createdAt).toLocaleString()
+                            : "—"}
+                        </td>
+                        <td>{status}</td>
+                        <td>
+                          <div className="inbox-actions">
+                            <button
+                              type="button"
+                              className="secondary"
+                              onClick={() => {
+                                setVerifyId(doc.id);
+                                runVerification(doc.id).catch(() => undefined);
+                                setDashboardView("workspace");
+                              }}
+                            >
+                              Open in workspace
+                            </button>
+                            <a
+                              href={doc.verifyUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Verify page
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+          </section>
+        </>
       ) : (
         <>
           <section className="card">
@@ -1496,7 +1664,9 @@ function App() {
   return (
     <div className="app">
       <header className="topbar">
-        <div className="logo">Secure Document Safe</div>
+        <div className="logo">
+          <img src="/secureit-logo-text.svg" alt="SecureIT" />
+        </div>
         {auth && (
           <div className="user-chip">
             <span>{auth.email}</span>

@@ -53,6 +53,15 @@
       "role": "lecturer",
       "created_at": "2025-12-12T05:02:13.123Z",
       "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjlxgq3uR9RzGIwvac5uIL5CY/HmeCPh6jz1tMWhy0mDzvONEEccBcJnfk0sZRDDORkw8NcqKQnGnhe5W/rlI5DgD4cdQ60vfdG7httZrcYy4c9SyJ30ELgoGIH+2dyIbNtCVaxBAciBX+rJpTIyyntVffa/YIHEw8v5DlmK0JwklKJpnfq7qrNT0eUqPpa277Wga+0ZhshNPI8gp8NmcfHOC7PEzHX6QRqwady8ug4HCBNitxcD9cgolptPt8Z1QJwUcrXn7vx1w8pwg0bhU1V90DCnMcnaRc5HPcPTu7yPn6LuBjzo4sjgpAWuMpsbRXhOF7ZHRTytWXOGDYIghBwIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    {
+      "id": "mj2izddy4ayo2r3j",
+      "name": "Fadhil",
+      "email": "fadhil@gmail.com",
+      "password_hash": "$2b$10$Y/HlHYGy.3jAef9i02fY1ORdiRmirLy4h8L0JIECjghrC/0kS.lsO",
+      "role": "student",
+      "created_at": "2025-12-12T07:08:10.246Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwcecz7GFtDQKZeM9jdD5BdA6YH0bE3PaInedelDCg05p/Se7DjMiTPWTja0hJ1q5+ciEkRzsDICSpUYXNr/2RenqDEHCqiWQOqLAWTjAjLQeo/OxSwfld+1ncL5otklSVvhceMY8dqSUkpCpvEWcFhBPo4qQ0H9C2fZ1uF4ldGZ7+K4BRIO5ioBaQglG6YoKQBhaHQuK8vWe204xqe2Ao92G50occtT0wvh3cnb68Fwqz1N5z+XFoUHuYsk400lfI8nh703WyAwMheRn1DfMEcnxZ5x3CAVoNS0pnk2Iy69hmMfZxxOmwGVaSKDmFdA8xCWn5QJ2W/6is9lFMWIylwIDAQAB\n-----END PUBLIC KEY-----"
     }
   ],
   "docs": [
@@ -64,7 +73,7 @@
       "filename": "chapter-13 (1).pptx",
       "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       "storage_path": "mj2c42m0-chapter-131.pptx",
-      "signature": null,
+      "signature": "unInGrvPuN4Y5lJQou5d3OPS4f54mpRrXheAQOCOUtt8ncI6yZiCQeRUN+nwKfR6x9e34zbUhqJjHHMP43QnEdeCiEq1DXocANcIE8yCMsfgDPbNJHrwB2Ho0F+6+V5y2x/K5cxUMYZxqbqeTU3iStszY6cd1HawBXnJfA+oERxODr8nA16Cs8moaW/OR9d6zI+fHA6czTZ7LTGoTDObNL+2Xa6l0FajylV338qDqBs6eTyvt1BKps53Me7d4hnl5U0jaBDCYau3AXfO4DUrvqbBKBb+u6RepZ6BC24tg0YRMDZUAguS+HfCxQ/2OAdajsSNIVS9YWkLPv02MdTCNg==",
       "created_at": "2025-12-12T03:55:52.250Z",
       "allowed": [
         "123@gmail.com"
@@ -88,7 +97,7 @@
       "filename": "chapter-08.pptx",
       "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
       "storage_path": "mj2ei58l-chapter-08.pptx",
-      "signature": null,
+      "signature": "wNUisW8AEbHl8BlEPi27M5B0D7i2cSgm2PpyzDipW0QNd3uNnuEGJshHOotex4gKfSIk982Ho5V5DmAIoVp95HRquoD9rIUtbNey5Q0kAQEu/Vk8PY99Z/M7zijYL3eJothTlSbvZvn5QTCb7P4n56i0YqZqcvgHHyOinMbr+ppE94HbLC+m7YbR+TaUdQI9zVLm7sIt6yJC8hnVMfnV0swT9GhwlqPQKd17h9h1XixNYYdF7dzCz2k9lOLtQmHc96+FrolKz/s7NkAsbuROfefiDdORfIW5n/IbwNyJs+rT+ClEEdHH/spuPtG+bNex6vBTaapaZAQ37Rl03E28QQ==",
       "created_at": "2025-12-12T05:02:48.071Z",
       "allowed": [
         "hhh@gmail.com",
@@ -102,6 +111,31 @@
         {
           "email": "hhh@gmail.com",
           "aes_key_encrypted": "KoX/mVUmNvKTSsHOc1hiUktyxP1Dzd/FYsuElcaQNzFpY+0mgFjsDuSnvX5HpR2UNUaW7ZcRD/UjdW8IU6uxhOzcHT+3eGyhSZ/Rp/cs8X6plq68ecK8jIYpYjovyf+KWKL+aGYVGFldMAFWYja+XONUOvFUHvq3u4szXkQhgEswa4h9nLNkfdpfCxoAbpnfv+2EViYOz3nxioLS/JKaYNjj8IFSoW6VBrfqg7GFcegQ8WOrWaiBy0OjZ4B/lauH0D6NYj4ZnfkUs83WdG2MMi1h8NR01NQuI8nnmePFtUHqhwpPVFAnum3D381unwUDLo6rDSry2D1SeimVfoA7Wg=="
+        }
+      ]
+    },
+    {
+      "id": "mj2j29wve9im5l3s",
+      "owner_id": "mj2ehe9viwmvuhi5",
+      "owner_email": "qqq@gmail.com",
+      "title": "Tugas Fadhil",
+      "filename": "c575d3b6-a6d5-45d6-8157-11407ab0ac9b.png",
+      "mime": "image/png",
+      "storage_path": "mj2j29wv-c575d3b6-a6d5-45d6-8157-11407ab0ac9b.png",
+      "signature": "PbmBnoFNtMtTiM8DY7/Y9jKSjvTWE3LhFEvbV+jXsiedSr23HXjvaZY23GeV4iVZ4D6BZHLlDJeOrSVTIKr5sO6jXZu/uvI0piEbnRY4aiVVDX3Y/QONpu5HKdo/Sl6zGzOrBVR2s8Mj56GLOS81Rl7SdZ+uButwS8xCOps5D4HPouQaZGJs0ogI3lIRGcJdWGh3rxK0ryt84Aq1XZLqyl4jtJkkOGmxEABaD93TUSdBP1gqDvHBIN3pqL/2MlvtjKnnUHI/T49g8CltyB+D3I+jJhUrVSLAe41LAewk67BD7OA3qZTolUWz6Vjo9lacjeiXqxPVMc4GzGbaX3YncA==",
+      "created_at": "2025-12-12T07:10:25.711Z",
+      "allowed": [
+        "fadhil@gmail.com",
+        "qqq@gmail.com"
+      ],
+      "keys": [
+        {
+          "email": "qqq@gmail.com",
+          "aes_key_encrypted": "DzHTGuionzZGXJ5/fjXvS4+vWTnbZRv+BD787a1Nmxs+a92iDm9bJIuk7OSf6vk1noEjHBnFtGBuY3Bvtaibl5+sdJ+Q+D0pqbYrDe3wMSPHctWrBc0kq5shIfv7QDw/0mq45mLCv/pf9cXEqdyBZa8X5LX4yIrilEkhQRlGA/s6NCSMyb0Llm97H62ksvnmzBuMwjCwjj37R+VnLhDRT00ZufJvLK+yxao1rI7Mr5z5tKbsWyDRhIkWTq4j2VgKqu7TvKNlEQvpqf+OyGP3N6XZHX1zZ0X+XV61pHgVvAJ6c0fJfhFUZz4vGvnF3quL5RYQdG44aUUDnzp7CcvD8A=="
+        },
+        {
+          "email": "fadhil@gmail.com",
+          "aes_key_encrypted": "M3Rw+QjsTBnhcvQkk2ADONVunoc8XFAHSK7LxHyxaNAHTEGoCgSc7WlCLAVs20z2dnzDu5Y+eNNz348KacigKIoBzAzXPANz7wBqno6M9LKJaPozAn9QfCWocuQZxTpe4piJDA2wt+43LRcD0M86w4tZ5UpJibN0whDPJ9TS5DlL/RiXy+hgHSVR/6Sxd8+TbkkAEJu/unL9MsZqaK8a+3//rltr6JMgPOYrhHBE+jgDsXCeyhO0iMIxOcrG3iRgQClYrguFgv547vqTnhG01rFL3xVk/8bo1ipMws7byij9wCcxAEhWHhVGEci7pvJD3kmZmvnJMbMysv33Dpyo7A=="
         }
       ]
     }

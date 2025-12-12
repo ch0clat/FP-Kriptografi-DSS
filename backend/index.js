@@ -157,7 +157,7 @@ async function loadDocumentForVerify(id) {
       'SELECT email FROM document_recipients WHERE doc_id = $1 ORDER BY email ASC',
       [id]
     )
-    return {
+    const result = {
       id: doc.id,
       title: doc.title,
       filename: doc.filename,
@@ -167,10 +167,57 @@ async function loadDocumentForVerify(id) {
       signature: doc.signature || null,
       allowed: recipients.rows.map(r => r.email),
     }
+    if (!result.createdAt) {
+      const fallback = new Date().toISOString()
+      result.createdAt = fallback
+      try {
+        await pool.query('UPDATE documents SET created_at = $1 WHERE id = $2', [new Date(fallback), id])
+      } catch (err) {
+        console.warn('Failed to backfill created_at for document', id, err.message)
+      }
+    }
+    if (!result.signature) {
+      const metadata = {
+        id: result.id,
+        title: result.title,
+        filename: result.filename,
+        mime: result.mime,
+        owner: { email: result.ownerEmail },
+        created_at: result.createdAt,
+      }
+      const newSignature = signMetadata(metadata)
+      result.signature = newSignature
+      try {
+        await pool.query('UPDATE documents SET signature = $1 WHERE id = $2', [newSignature, id])
+      } catch (err) {
+        console.warn('Failed to persist signature for document', id, err.message)
+      }
+    }
+    return result
   }
   const data = readFileDb()
   const doc = data.docs.find(d => d.id === id)
   if (!doc) return null
+  let mutated = false
+  if (!doc.created_at) {
+    doc.created_at = new Date().toISOString()
+    mutated = true
+  }
+  if (!doc.signature) {
+    const metadata = {
+      id: doc.id,
+      title: doc.title,
+      filename: doc.filename,
+      mime: doc.mime,
+      owner: { email: doc.owner_email },
+      created_at: doc.created_at,
+    }
+    doc.signature = signMetadata(metadata)
+    mutated = true
+  }
+  if (mutated) {
+    writeFileDb(data)
+  }
   return {
     id: doc.id,
     title: doc.title,
@@ -391,6 +438,8 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
 
   const ownerId = req.user.id
   const ownerEmail = req.user.email
+  const createdAt = new Date()
+  const createdAtIso = createdAt.toISOString()
   const parsedAllowed = (() => {
     try {
       return typeof allowed === 'string' ? JSON.parse(allowed) : allowed || []
@@ -413,6 +462,17 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
   const storageName = `${Date.now().toString(36)}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '')}`
   const storagePath = path.join(STORAGE_DIR, storageName)
 
+  const metadataForSignature = {
+    id: docId,
+    title: title || file.originalname,
+    filename: file.originalname,
+    mime: file.mimetype,
+    owner: { email: ownerEmail },
+    created_at: createdAtIso,
+  }
+  const computedSignature = signMetadata(metadataForSignature)
+  const recordSignature = signature || computedSignature
+
   try {
     fs.writeFileSync(storagePath, file.buffer)
 
@@ -422,8 +482,8 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
         await client.query('BEGIN')
         await client.query(
           `INSERT INTO documents
-           (id, owner_id, owner_email, title, filename, mime, storage_path, signature)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+           (id, owner_id, owner_email, title, filename, mime, storage_path, created_at, signature)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
           ,[
             docId,
             ownerId,
@@ -432,7 +492,8 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
             file.originalname,
             file.mimetype,
             storageName,
-            signature || null,
+            createdAt,
+            recordSignature,
           ]
         )
         for (const email of allowedList) {
@@ -452,7 +513,6 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
       }
     } else {
       const data = readFileDb()
-      const created = new Date().toISOString()
       const docRecord = {
         id: docId,
         owner_id: ownerId,
@@ -461,8 +521,8 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
         filename: file.originalname,
         mime: file.mimetype,
         storage_path: storageName,
-        signature: signature || null,
-        created_at: created,
+        signature: recordSignature,
+        created_at: metadataForSignature.created_at,
         allowed: allowedList,
         keys: Object.keys(keysObj || {}).map(email => ({
           email,
@@ -479,6 +539,69 @@ app.post('/api/docs', authMiddleware, upload.single('file'), async (req, res) =>
     console.error('Document upload failed:', e.message)
     if (fs.existsSync(storagePath)) fs.unlink(storagePath, () => {})
     return res.status(500).json({ error: 'Upload failed: ' + e.message })
+  }
+})
+
+app.get('/api/docs/inbox', authMiddleware, async (req, res) => {
+  const userEmail = req.user.email
+  try {
+    if (usePostgres) {
+      const { rows } = await pool.query(
+        `SELECT d.id,
+                d.title,
+                d.filename,
+                d.mime,
+                d.owner_email,
+                d.created_at,
+                (CASE WHEN dr.aes_key_encrypted IS NOT NULL THEN TRUE ELSE FALSE END) AS has_key,
+                (CASE WHEN d.owner_email = $1 THEN TRUE ELSE FALSE END) AS is_owner
+         FROM documents AS d
+         LEFT JOIN document_recipients AS dr
+           ON dr.doc_id = d.id AND dr.email = $1
+         WHERE d.owner_email = $1 OR dr.email IS NOT NULL
+         ORDER BY d.created_at DESC NULLS LAST, d.id DESC`,
+        [userEmail]
+      )
+      const docs = rows.map((row) => ({
+        id: row.id,
+        title: row.title,
+        filename: row.filename,
+        mime: row.mime,
+        ownerEmail: row.owner_email,
+        createdAt: row.created_at ? row.created_at.toISOString() : null,
+        isOwner: !!row.is_owner,
+        hasKey: !!row.has_key,
+        verifyUrl: `${req.protocol}://${req.get('host')}/verify/${row.id}`,
+      }))
+      return res.json({ docs })
+    }
+
+    const data = readFileDb()
+    const docs = (data.docs || [])
+      .filter((doc) => doc.owner_email === userEmail || (doc.allowed || []).includes(userEmail))
+      .sort((a, b) => {
+        const aTime = a.created_at ? Date.parse(a.created_at) : 0
+        const bTime = b.created_at ? Date.parse(b.created_at) : 0
+        return bTime - aTime
+      })
+      .map((doc) => {
+        const keyEntry = (doc.keys || []).find((k) => k.email === userEmail)
+        return {
+          id: doc.id,
+          title: doc.title,
+          filename: doc.filename,
+          mime: doc.mime,
+          ownerEmail: doc.owner_email,
+          createdAt: doc.created_at || null,
+          isOwner: doc.owner_email === userEmail,
+          hasKey: Boolean(keyEntry && keyEntry.aes_key_encrypted),
+          verifyUrl: `${req.protocol}://${req.get('host')}/verify/${doc.id}`,
+        }
+      })
+    return res.json({ docs })
+  } catch (err) {
+    console.error('Failed to load inbox docs:', err)
+    return res.status(500).json({ error: 'failed to load inbox' })
   }
 })
 

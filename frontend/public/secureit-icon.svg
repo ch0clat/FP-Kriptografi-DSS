@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title>SecureIT shield icon</title>
+  <defs>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#133d73" />
+      <stop offset="100%" stop-color="#1f4f96" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M128 20 40 52v76c0 49.6 33.2 96.1 83.3 112.6a10.5 10.5 0 0 0 6.8 0C180.2 224.1 213.4 177.6 213.4 128V52Z"
+    fill="url(#shieldGradient)"
+    stroke="#0b2c55"
+    stroke-width="10"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M106 82h60v68h-60z"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="10"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M106 82h40v24h20"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="10"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M154 140a18 18 0 1 0-36 0v16h-8v36h52v-36h-8Zm-18-12a12 12 0 0 1 12 12v16h-24v-16a12 12 0 0 1 12-12Z"
+    fill="#ffffff"
+  />
+</svg>
