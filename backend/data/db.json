@@ -1,0 +1,109 @@
+{
+  "users": [
+    {
+      "id": "mj2buknxjmfgtm",
+      "name": "Abhirama Triadyatma Hermawan",
+      "email": "123@gmail.com",
+      "password_hash": "$2b$10$plS2dmMYL8rrlP.1KXZ4gOCXAheBRTAB.AzJIniJYeQjIKsGJlQeK",
+      "role": "student",
+      "created_at": "2025-12-12T03:48:29.085Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtTiy04P/DuUIadeBpu+UlX1XbN9G91QpEk9HT7sYFCc8fyXP1ypAHOy7OpiyOZ2vzAJAfwtDrs41PhlXlgwMjYslsQDz/hEgIyAUZfBGNDoIBWWOqgGlOiXlsZcea4GUQrrQc101Y44oRI+uW1rGIFMaXSWU+DmyQTvbuRpYKOqRdFZqkPTGcSezB4N0DVikneu1l+LsRGF8FJsaK/iggyT3lqY06mjqC+bd8uTpDS+P5kw0Q+YqS7nenx3IP5kibVz4twWr3xzF8ZiV4yyQa6fecAEP2zOohVW2RqYl8MhkMlegP4JLhb8M4ed22PD6WW2fzTP3/4DZDKwCIKRcpwIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    {
+      "id": "mj2bwu2eqbfwcf",
+      "name": "Noway",
+      "email": "abc@gmail.com",
+      "password_hash": "$2b$10$qGHDPlZ9cWWrjNYFLbk0rerUjcltw1lQWoh1K.AiLZy8k6tucKtpa",
+      "role": "lecturer",
+      "created_at": "2025-12-12T03:50:14.582Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzUQj5XouDCj7O70TbUGzeWYc2c9FVYiAwS44v6JVghR9A87VAUKcXOCJD2aUJYXwYbqtNupOsyLM0YCH+N5iyBTL08Jn7osnnWiWGZCRCUlXIouBtFBXvUoySNxZ3XSJpDDtlYG02/6jqKmYNjM/3PwP88JEXpwCgXIsJURpnTGUzoXVilPysjmiczfU9FcP9nwIzE/4YJqOYvPnKkgvrGqpE+8YhEFnxudsVZDzoOFXwDXl2n2CrL/5jk9RTK67vRWnADTtDedYqEMePf9dWzKw47G87HTMjoCexQ059Y8DCXDi95i+FzvJ4Nnm1gwdlw1gYbXOgMwcfTTJCaBBvQIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    {
+      "id": "mj2c582kcoplfe",
+      "name": "aaa",
+      "email": "321@gmail.com",
+      "password_hash": "$2b$10$yGNgZnjv7DtPaUCh6JYpEO0bL1J58mI8w6pcWl15pxNA0iCSFNMnG",
+      "role": "student",
+      "created_at": "2025-12-12T03:56:45.980Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmcbg22a7AFRLVV8Qk70sMi8sDK+Sn71UX2AV/suEuZOgZUs7/Eu2W2fVoOhSiLK+pt0K7G/w8rMKPAM/Fh2NejcLiYcrA6LDPJL27NeEEKVTPCcoqmmRI+9zvIJ2YAWP3cp9g52j1HFGTymCzW7xei/awNmgG66jbyDLsCo0b01Kmc8BViASU9WRnpW8whUJZ6XpWZL+PaX1mqupY35ue2oFPE49Pc6j6feS1x/h6esOKRmasi6+e37tJZMJg0y/Y0/5eq/O1unwE1o5ZV5aMkpS5sdrDa4wqEogyfvW1bvsXcGHmGCSUddZ9UDWIsrKUzKo1YQSKRkGtN2JuR/3ZwIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    {
+      "id": "mj2deerkab62e97j",
+      "name": "abc",
+      "email": "000@gmail.com",
+      "password_hash": "$2b$10$om9OlLGsgjxLG2UJCCjU2OLDOpLJIANG5gPI9wRCHRh5gIvZWu/oK",
+      "role": "student",
+      "created_at": "2025-12-12T04:31:54.176Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm5JRReBfCMlFLGRYTdUmydtg3MzIyAME0D3BYJa1J6hYINgNASJ4fSGj8dmQNMIqyAvj+wCNKLGwHhessyB53/ocoMz1LKVO88GkIRmwk1iQkJBIDho8KL9p48LpdlsA3QYeMAvs0t+5B1MbFPAN3AFefp7Pyv4SJe3mTzoXCNHzbCfPVBZiaPUMExJN5h+zPqkZn+KucHdloSbDhVcKRn/TwzbHG5TyZ3qDsHIh+0SOZwSXMM/VJEtF2qR9vCSvHYwQaIliQMOJ8SnFBA78Nq7Il9sVSYuCMtNJrH6L2gHk1F1sOgU4LTRVBo0tnkY39ygMoGPXvwxQOnpLz9S4rwIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    {
+      "id": "mj2efwlnnr0lwici",
+      "name": "Abhi",
+      "email": "hhh@gmail.com",
+      "password_hash": "$2b$10$sJHZoSUTEKJdFQrNY2NL6uuAdmJXAFiV.FdgMAN/s5NuBhMH50h5G",
+      "role": "student",
+      "created_at": "2025-12-12T05:01:03.563Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3U4PjV1dW240kDtfpyzvwUDfmQAdcQZzjPcHlZou2a3UE7je6tktGXdXQ+nrHmvRaXqCdNQ4X2KStrGbK64CwZOvj0yeugdGiQyY2d5lj2QW6k/0N3Z4Vw9s88CrNRuMKMoHFkXG1rxt+ogCt2nKGzvIweSTaQbw1TSZQ4bqS0bSFoDBvzHotsauEkWb/w5k0YBuo8ASiMdP2/Fjr5CpW8JYnENkOM/HrjaySS6b18IGjICsPkPI/7vknxJYZgD9OetmLpFgi1YLmOFtqbV88dBgNXwv/1ev3emUNvbl6+cnmJOeWBoflHpEgfkhFFtoEVU9jiTkzH1Z/orDr/TVAQIDAQAB\n-----END PUBLIC KEY-----"
+    },
+    {
+      "id": "mj2ehe9viwmvuhi5",
+      "name": "dosen1",
+      "email": "qqq@gmail.com",
+      "password_hash": "$2b$10$5Hayc5oA15nNAZdJOwHD1ub3Jm79QraTbH3SOKIP95uLnXToS49U2",
+      "role": "lecturer",
+      "created_at": "2025-12-12T05:02:13.123Z",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjlxgq3uR9RzGIwvac5uIL5CY/HmeCPh6jz1tMWhy0mDzvONEEccBcJnfk0sZRDDORkw8NcqKQnGnhe5W/rlI5DgD4cdQ60vfdG7httZrcYy4c9SyJ30ELgoGIH+2dyIbNtCVaxBAciBX+rJpTIyyntVffa/YIHEw8v5DlmK0JwklKJpnfq7qrNT0eUqPpa277Wga+0ZhshNPI8gp8NmcfHOC7PEzHX6QRqwady8ug4HCBNitxcD9cgolptPt8Z1QJwUcrXn7vx1w8pwg0bhU1V90DCnMcnaRc5HPcPTu7yPn6LuBjzo4sjgpAWuMpsbRXhOF7ZHRTytWXOGDYIghBwIDAQAB\n-----END PUBLIC KEY-----"
+    }
+  ],
+  "docs": [
+    {
+      "id": "mj2c42m2tj0kfi",
+      "owner_id": "mj2bwu2eqbfwcf",
+      "owner_email": "abc@gmail.com",
+      "title": "aaa",
+      "filename": "chapter-13 (1).pptx",
+      "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "storage_path": "mj2c42m0-chapter-131.pptx",
+      "signature": null,
+      "created_at": "2025-12-12T03:55:52.250Z",
+      "allowed": [
+        "123@gmail.com"
+      ],
+      "keys": [
+        {
+          "email": "abc@gmail.com",
+          "aes_key_encrypted": "M8AyaoG2v0Ypnpl37ORLODjiMOsc0llV9WA1f25/IuvpcfhSzXvougMhyabYHSrod/Hd8NrNlENIaYXCV+pRxLR3b0SKbHhS5z9b4tgTVltoXXZARH3+rVtPKGGVp60ibSg6Cf9cvD+ONDeC0vq3oEzmrXOdq+SH4om0UrHkf2dGCYhxaVEdYDaHsLcV7ZIg+0SDyiGXY7OlO7bDSyskBEbwt7819iiFwNnlms9C6GTT5xnX9CrBQBIhb4486GziEQYRR/JEHaw/xJSoIZbJe/hZTHJ4V+k0ax0rgiP7gqvgDrtfDvElVpRtos0b67EqhS6rje+I0Sf4h4yDxW2NKg=="
+        },
+        {
+          "email": "123@gmail.com",
+          "aes_key_encrypted": "p0Cb7jIkZb3/D9SqoGUJRzb3Fl7D8KoFbRQuy/iwOe1zo8lbMYwbFO6zOEj68Td7Kqtscb5RizxBTVXOpql/0b5DpotAE8wCKzJSoJNBnuqz5RMHF23XrhD0mD99E44l5UHGWLdMuVMlPrwzzHusvBzA+YVlbNCru7QUpjZWePTsl/4huNXOlge4mPOFwdkcK0M3y35h2BdH22G2vHJevnA2GUNHBIGcp6f8yu1GVoVLpC7jxtChX3BMSt/3xR3ZyI4PqwxpDwPv7GuvrLs6AhtFdgw9+GicEsQqBrinJ/P9of4Yi5GbodbL1H6+c/JdSCn4FCnEowNSJBxMmxCdiA=="
+        }
+      ]
+    },
+    {
+      "id": "mj2ei58lupvk0hft",
+      "owner_id": "mj2ehe9viwmvuhi5",
+      "owner_email": "qqq@gmail.com",
+      "title": "Hasil Tugas 1",
+      "filename": "chapter-08.pptx",
+      "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "storage_path": "mj2ei58l-chapter-08.pptx",
+      "signature": null,
+      "created_at": "2025-12-12T05:02:48.071Z",
+      "allowed": [
+        "hhh@gmail.com",
+        "qqq@gmail.com"
+      ],
+      "keys": [
+        {
+          "email": "qqq@gmail.com",
+          "aes_key_encrypted": "Tw91tCHvV9GBGvEpvStfaJeObRCDeQtLzgujtzqHgvaksdvBdgSUeAMeD1UZJhsRCqruL3OUR7HQRghLkJ7VZ45VIQoJRvcn1c6bQhybFp9HCoKj4iJfxFrDY6ESXre7hKdIybB1CylVhC54Cs7BURvlm1VEftaP5nS1fRzC+aAFbr7YCQiAJPVQ5FwAjDcIKCWYgO3gn9WxO7nFO76PSOWEi9/2mz9v9j3y3sr3u5KLsrXuD+d3+N1BQniBQ4ja0hR/ju8M3k/0AkqoQOV5CJC7d/ifhffpom/46vNnI1Sbi6NLpNjoESIYDx19quTxkvcrRhhAh+aaWaA35v4OzQ=="
+        },
+        {
+          "email": "hhh@gmail.com",
+          "aes_key_encrypted": "KoX/mVUmNvKTSsHOc1hiUktyxP1Dzd/FYsuElcaQNzFpY+0mgFjsDuSnvX5HpR2UNUaW7ZcRD/UjdW8IU6uxhOzcHT+3eGyhSZ/Rp/cs8X6plq68ecK8jIYpYjovyf+KWKL+aGYVGFldMAFWYja+XONUOvFUHvq3u4szXkQhgEswa4h9nLNkfdpfCxoAbpnfv+2EViYOz3nxioLS/JKaYNjj8IFSoW6VBrfqg7GFcegQ8WOrWaiBy0OjZ4B/lauH0D6NYj4ZnfkUs83WdG2MMi1h8NR01NQuI8nnmePFtUHqhwpPVFAnum3D381unwUDLo6rDSry2D1SeimVfoA7Wg=="
+        }
+      ]
+    }
+  ]
+}
